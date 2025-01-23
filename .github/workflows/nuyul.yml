@@ -1,0 +1,27 @@
+name: Update IP
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"
+  workflow_dispatch:
+
+jobs:
+  update-ip:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Ambil data IP dari API
+      run: |
+        TIMESTAMP=$(date +'%Y-%m-%d_%H-%M')
+        curl -s https://api.myip.com > ./update/ip-$TIMESTAMP.json
+
+    - name: Tambahkan file ip.json ke Git
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@users.noreply.github.com"
+        git add ./update/ip-*.json
+        git commit -m "The files has been updated"
+        git push
