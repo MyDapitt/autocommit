@@ -2,26 +2,36 @@ name: Auto Add Files
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
-  workflow_dispatch:
+    - cron: '*/5 * * * *'  # Menjalankan commit otomatis setiap setengah jam (00 dan 30 menit setiap jam)
+  push:
+    branches:
+      - main  # Ubah dengan nama cabang yang sesuai jika diperlukan
 
 jobs:
-  update-ip:
+  auto-commit:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Add files
-      run: |
-        TIMESTAMP=$(date +'%Y-%m-%d_%H-%M')
-        curl -s https://api.myip.com > ./update/$TIMESTAMP.txt
- 
-    - name: Upload to GitHub
-      run: |
-        git config --global user.name "MyDapitt"
-        git config --global user.email "dapitt@onee.eu.org"
-        git add ./update/*.txt
-        git commit -m "The files has been updated ($TIMESTAMP)"
-        git push
+      - name: Set up Git
+        run: |
+          git config --global user.name "MyDapitt"
+          git config --global user.email "dapitt@onee.eu.org"
+
+      - name: Add current date and time to file.txt in WIB
+        run: |
+          TIMESTAMP=$(date +'%Y-%m-%d_%H-%M')
+          echo "$(TZ='Asia/Jakarta' date)" > ./update/$TIMESTAMP.txt
+          git add *  # Menambahkan yang telah dimodifikasi
+
+      - name: Commit changes
+        run: |
+          git commit -m "Update at $TIMESTAMP"
+          git push
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GHT_TOKEN }}  # Token akses GitHub otomatis
+        run: git push
