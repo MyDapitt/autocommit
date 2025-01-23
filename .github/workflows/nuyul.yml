@@ -20,8 +20,8 @@ jobs:
 
     - name: Tambahkan file ip.json ke Git
       run: |
-        git config --global user.name "github-actions"
-        git config --global user.email "github-actions@users.noreply.github.com"
+        git config --global user.name "MyDapitt"
+        git config --global user.email "dapitt@onee.eu.org"
         git add ./update/ip-*.json
         git commit -m "The files has been updated"
         git push
