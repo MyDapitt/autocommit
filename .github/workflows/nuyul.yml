@@ -17,7 +17,7 @@ jobs:
       run: |
         mkdir update
         TIMESTAMP=$(date +'%Y-%m-%d_%H-%M')
-        echo "ok" >> ./update/$TIMESTAMP.txt
+        curl -s https://api.myip.com > ./update/$TIMESTAMP.txt
  
     - name: Upload to GitHub
       run: |
