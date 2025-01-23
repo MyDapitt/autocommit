@@ -1,4 +1,4 @@
-name: Add files
+name: Auto Add Files
 
 on:
   schedule:
@@ -23,5 +23,5 @@ jobs:
         git config --global user.name "MyDapitt"
         git config --global user.email "dapitt@onee.eu.org"
         git add ./update/*.txt
-        git commit -m "The files has been updated"
+        git commit -m "The files has been updated ($TIMESTAMP)"
         git push
