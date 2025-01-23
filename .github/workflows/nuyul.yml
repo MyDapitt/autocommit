@@ -1,4 +1,4 @@
-name: Update IP
+name: Add files
 
 on:
   schedule:
@@ -13,15 +13,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Ambil data IP dari API
+    - name: Add files
       run: |
+        mkdir update
         TIMESTAMP=$(date +'%Y-%m-%d_%H-%M')
-        curl -s https://api.myip.com > ./update/ip-$TIMESTAMP.json
-
-    - name: Tambahkan file ip.json ke Git
+        curl -s https://api.myip.com > ./update/$TIMESTAMP.txt
+ 
+    - name: Upload to GitHub
       run: |
         git config --global user.name "MyDapitt"
         git config --global user.email "dapitt@onee.eu.org"
-        git add ./update/ip-*.json
+        git add ./update/*.txt
         git commit -m "The files has been updated"
         git push
