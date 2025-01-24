@@ -28,7 +28,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git commit -m "Update at $TIMESTAMP"
+          git commit -m "Success"
           git push
 
       - name: Push changes
