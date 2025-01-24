@@ -2,7 +2,7 @@ name: Auto Add Files
 
 on:
   schedule:
-    - cron: '0 12 * * *'  # Menjalankan commit otomatis setiap setengah jam (00 dan 30 menit setiap jam)
+    - cron: '*/2 * * * *'  # Menjalankan commit otomatis setiap 2 menit
   push:
     branches:
       - main  # Ubah dengan nama cabang yang sesuai jika diperlukan
