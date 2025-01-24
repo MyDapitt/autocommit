@@ -24,6 +24,7 @@ jobs:
         run: |
           TIMESTAMP=$(date +'%Y-%m-%d_%H-%M')
           echo "$(TZ='Asia/Jakarta' date)" > ./update/$TIMESTAMP.txt
+          echo "$(TZ='Asia/Jakarta' date)" >> file.txt
           git add *  # Menambahkan yang telah dimodifikasi
 
       - name: Commit changes
