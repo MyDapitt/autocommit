@@ -22,6 +22,7 @@ jobs:
 
       - name: Add current date and time to file.txt in WIB
         run: |
+          rm -rf ./update/*
           TIMESTAMP=$(date +'%Y-%m-%d_%H-%M')
           echo "$(TZ='Asia/Jakarta' date)" > ./update/$TIMESTAMP.txt
           echo "$(TZ='Asia/Jakarta' date)" >> file.txt
@@ -29,7 +30,8 @@ jobs:
 
       - name: Commit changes
         run: |
-          git commit -m "Success"
+          echo "TS=$(date '+%A, %d %B %Y, %H:%M')" >> $GITHUB_ENV
+          git commit -m "Update: ${{ env.DATE }}"
           git push
 
       - name: Push changes
