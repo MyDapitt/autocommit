@@ -8,7 +8,7 @@ on:
       - main  # Ubah dengan nama cabang yang sesuai jika diperlukan
 
 jobs:
-  auto-commit:
+  add-files:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +30,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          TS=$(date '+%A, %d %B %Y, %H:%M')
+          TS=$(date +"%Y-%m-%d_%H-%M-%S")
           git commit -m $TS
           git push
 
