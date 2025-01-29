@@ -30,8 +30,8 @@ jobs:
 
       - name: Commit changes
         run: |
-          echo "TS=$(date '+%A, %d %B %Y, %H:%M')" >> $GITHUB_ENV
-          git commit -m ${{ env.DATE }}
+          TS=$(date '+%A, %d %B %Y, %H:%M')
+          git commit -m $TS
           git push
 
       - name: Push changes
