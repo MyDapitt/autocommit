@@ -22,9 +22,9 @@ jobs:
 
       - name: Update files
         run: |
-          rm -rf ./update/*
+          rm -rf ./2/*
           TIMESTAMP=$(date +'%Y-%m-%d_%H-%M')
-          echo "$(TZ='Asia/Jakarta' date)" > ./update/$TIMESTAMP.txt
+          echo "$(TZ='Asia/Jakarta' date)" > ./2/$TIMESTAMP.txt
           echo "$(TZ='Asia/Jakarta' date)" >> 2.txt
           git add *  # Menambahkan yang telah dimodifikasi
 
